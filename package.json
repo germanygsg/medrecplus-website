@@ -14,10 +14,12 @@
   "type": "module",
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
+    "@vercel/node": "^5.5.33",
     "framer-motion": "^12.33.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^7.13.0",
+    "resend": "^6.9.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",

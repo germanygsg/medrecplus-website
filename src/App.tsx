@@ -9,7 +9,6 @@ const BuyPage = lazy(() => import('./pages/BuyPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const RefundPage = lazy(() => import('./pages/RefundPage'));
-const ContactPage = lazy(() => import('./pages/ContactPage'));
 const Footer = lazy(() => import('./components/Footer'));
 
 const PageLoader = () => (
@@ -54,7 +53,7 @@ export default function App() {
             <Route path="/privacy" element={<Layout showNavbar={false}><PrivacyPage /></Layout>} />
             <Route path="/terms" element={<Layout showNavbar={false}><TermsPage /></Layout>} />
             <Route path="/refund" element={<Layout showNavbar={false}><RefundPage /></Layout>} />
-            <Route path="/contact" element={<Layout showNavbar={false}><ContactPage /></Layout>} />
+            <Route path="/contact" element={<Layout><HomePage /></Layout>} />
           </Routes>
         </Suspense>
       </div>

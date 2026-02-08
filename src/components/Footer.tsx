@@ -83,7 +83,7 @@ export default function Footer() {
                   support@medrecplus.my.id
                 </a>
               </li>
-              <li><NavLink href="/contact">Contact Us</NavLink></li>
+              <li><NavLink href="#contact">Contact Us</NavLink></li>
               <li>
                 <a href="/app/" className="text-sm text-slate-400 hover:text-white transition-colors">
                   Open App

@@ -9,6 +9,7 @@ const MobileSupport = lazy(() => import('../components/MobileSupport'));
 const Security = lazy(() => import('../components/Security'));
 const HowItWorks = lazy(() => import('../components/HowItWorks'));
 const Pricing = lazy(() => import('../components/Pricing'));
+const Contact = lazy(() => import('../components/Contact'));
 const FAQ = lazy(() => import('../components/FAQ'));
 const CTA = lazy(() => import('../components/CTA'));
 
@@ -45,6 +46,10 @@ export default function HomePage() {
 
             <Suspense fallback={<SectionLoader />}>
                 <Pricing />
+            </Suspense>
+
+            <Suspense fallback={<SectionLoader />}>
+                <Contact />
             </Suspense>
 
             <Suspense fallback={<SectionLoader />}>

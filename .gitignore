@@ -27,3 +27,4 @@ dist-ssr
 ffmpeg/
 /ss/
 !public/ss/
+.env
