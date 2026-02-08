@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import Hero from '../components/Hero';
 import MobileStickyBar from '../components/MobileStickyBar';
+import BackToTop from '../components/BackToTop';
 
 // Lazy load below-the-fold components
 const ProblemSolution = lazy(() => import('../components/ProblemSolution'));
@@ -60,6 +61,7 @@ export default function HomePage() {
                 <CTA />
             </Suspense>
 
+            <BackToTop />
             <MobileStickyBar />
             {/* Bottom spacer for mobile sticky bar */}
             <div className="h-20 md:hidden" aria-hidden="true" />

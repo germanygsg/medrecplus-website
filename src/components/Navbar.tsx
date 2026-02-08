@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: 'Features', href: '#features' },
   { label: 'Security', href: '#security' },
   { label: 'Pricing', href: '#pricing' },
+  { label: 'Contact', href: '#contact' },
   { label: 'FAQ', href: '#faq' }
 ];
 
@@ -55,7 +56,7 @@ export default function Navbar() {
       className="fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out"
       style={{
         top: isCompact ? '12px' : '0px',
-        width: isCompact ? 'min(600px, calc(100% - 2rem))' : '100%',
+        width: isCompact ? 'min(800px, calc(100% - 2rem))' : '100%',
         backgroundColor: isCompact || open ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
         backdropFilter: isCompact || open ? 'blur(12px)' : 'none',
         boxShadow: isCompact
@@ -73,20 +74,24 @@ export default function Navbar() {
       <div
         className="transition-all duration-500 ease-in-out"
         style={{
-          maxWidth: isCompact ? '600px' : '1280px',
+          maxWidth: isCompact ? undefined : '1280px',
           margin: '0 auto',
-          padding: isCompact ? '0 1rem' : '0 1rem'
+          padding: isCompact ? '0 1.5rem' : '0 1rem'
         }}
       >
         <div
-          className="flex items-center justify-between transition-all duration-500 ease-in-out"
+          className="flex items-center transition-all duration-500 ease-in-out"
           style={{
-            height: isCompact ? '3.5rem' : '4rem'
+            height: isCompact ? '3.5rem' : '4rem',
+            justifyContent: isCompact ? undefined : 'space-between',
+            width: '100%'
           }}
         >
           {/* Logo */}
           <a href="#" className="flex items-center shrink-0 transition-all duration-500 ease-in-out"
-            style={{ gap: isCompact ? '0.5rem' : '0.625rem' }}>
+            style={{
+              gap: isCompact ? '0.5rem' : '0.625rem'
+            }}>
             <img
               src={logo}
               alt="MedRecPlus"
@@ -104,9 +109,12 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop links - centered when compact */}
-          <div className={`hidden md:flex items-center gap-1 transition-all duration-500 ease-in-out ${isCompact ? 'absolute left-1/2 -translate-x-1/2' : ''
-            }`}>
+          {/* Spacer - left side */}
+          {isCompact && <div style={{ flexGrow: 1 }} />}
+
+          {/* Desktop links */}
+          <div className={`hidden md:flex items-center gap-1 transition-all duration-500 ease-in-out`}
+          >
             {NAV_LINKS.map((l) => (
               <a
                 key={l.href}
@@ -121,7 +129,7 @@ export default function Navbar() {
                     : 'text-slate-600 hover:text-primary-600'
                   }`}
                 style={{
-                  padding: isCompact ? '0.375rem 0.625rem' : '0.5rem 0.875rem',
+                  padding: isCompact ? '0.375rem 0.5rem' : '0.5rem 0.875rem',
                   fontSize: isCompact ? '0.75rem' : '0.875rem'
                 }}
               >
@@ -136,9 +144,13 @@ export default function Navbar() {
             ))}
           </div>
 
+          {/* Spacer - right side */}
+          {isCompact && <div style={{ flexGrow: 1 }} />}
+
           {/* Desktop CTA */}
           <div className={`hidden md:flex items-center transition-all duration-500 ease-in-out ${isCompact ? 'gap-2' : 'gap-3'
-            }`}>
+            }`}
+          >
             <a
               href="/app/"
               className="font-medium text-slate-700 hover:text-primary-600 transition-all duration-300"
