@@ -1,4 +1,5 @@
 import { AppWindow, ShoppingCart } from '@phosphor-icons/react';
+import { Link } from 'react-router-dom';
 import { useScrollDirection } from '../hooks/useScrollDirection';
 
 export default function MobileStickyBar() {
@@ -21,13 +22,13 @@ export default function MobileStickyBar() {
           <AppWindow size={18} weight="duotone" className="text-slate-500" />
           Open App
         </a>
-        <a
-          href="#pricing"
+        <Link
+          to="/buy"
           className="flex-1 inline-flex items-center justify-center gap-2 py-3 text-center text-sm font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-colors shadow-sm"
         >
           <ShoppingCart size={18} weight="duotone" className="text-white/90" />
           Buy — $20
-        </a>
+        </Link>
       </div>
     </div>
   );

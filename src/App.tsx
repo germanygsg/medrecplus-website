@@ -1,72 +1,63 @@
 import { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import MobileStickyBar from './components/MobileStickyBar';
 
-// Lazy load below-the-fold components
-const ProblemSolution = lazy(() => import('./components/ProblemSolution'));
-const Features = lazy(() => import('./components/Features'));
-const MobileSupport = lazy(() => import('./components/MobileSupport'));
-const Security = lazy(() => import('./components/Security'));
-const HowItWorks = lazy(() => import('./components/HowItWorks'));
-const Pricing = lazy(() => import('./components/Pricing'));
-const FAQ = lazy(() => import('./components/FAQ'));
-const CTA = lazy(() => import('./components/CTA'));
+// Lazy load pages
+const HomePage = lazy(() => import('./pages/HomePage'));
+const BuyPage = lazy(() => import('./pages/BuyPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const RefundPage = lazy(() => import('./pages/RefundPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const Footer = lazy(() => import('./components/Footer'));
 
-const SectionLoader = () => (
-  <div className="w-full py-24 flex items-center justify-center">
-    <div className="w-8 h-8 rounded-full border-2 border-primary-200 border-t-primary-600 animate-spin" />
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="w-10 h-10 rounded-full border-3 border-primary-200 border-t-primary-600 animate-spin" />
   </div>
 );
 
-export default function App() {
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+// Layout component for pages that show navbar and footer
+function Layout({ children, showNavbar = true }: { children: React.ReactNode; showNavbar?: boolean }) {
   return (
-    <div className="min-h-screen bg-white text-slate-900 antialiased">
-      <Navbar />
-      <main>
-        <Hero />
-
-        <Suspense fallback={<SectionLoader />}>
-          <ProblemSolution />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <Features />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <MobileSupport />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <Security />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <HowItWorks />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <Pricing />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <FAQ />
-        </Suspense>
-
-        <Suspense fallback={<SectionLoader />}>
-          <CTA />
-        </Suspense>
-      </main>
-
-      <Suspense fallback={<SectionLoader />}>
+    <>
+      {showNavbar && <Navbar />}
+      <main>{children}</main>
+      <Suspense fallback={null}>
         <Footer />
       </Suspense>
+    </>
+  );
+}
 
-      <MobileStickyBar />
-      {/* Bottom spacer for mobile sticky bar */}
-      <div className="h-20 md:hidden" aria-hidden="true" />
-    </div>
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <div className="min-h-screen bg-white text-slate-900 antialiased">
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Layout><HomePage /></Layout>} />
+            <Route path="/buy" element={<Layout showNavbar={false}><BuyPage /></Layout>} />
+            <Route path="/privacy" element={<Layout showNavbar={false}><PrivacyPage /></Layout>} />
+            <Route path="/terms" element={<Layout showNavbar={false}><TermsPage /></Layout>} />
+            <Route path="/refund" element={<Layout showNavbar={false}><RefundPage /></Layout>} />
+            <Route path="/contact" element={<Layout showNavbar={false}><ContactPage /></Layout>} />
+          </Routes>
+        </Suspense>
+      </div>
+    </BrowserRouter>
   );
 }

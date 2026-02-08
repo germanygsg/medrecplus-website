@@ -1,5 +1,6 @@
 import { CheckCircle, Sparkle } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import AnimateOnScroll from './AnimateOnScroll';
 
 const INCLUDED = [
@@ -85,14 +86,15 @@ export default function Pricing() {
               </ul>
 
               {/* CTA */}
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href="#"
-                className="block w-full py-4 text-center text-base font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-2xl transition-all shadow-lg shadow-primary-600/20 btn-shimmer"
-              >
-                Buy MedRecPlus — $20
-              </motion.a>
+              <Link to="/buy">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="block w-full py-4 text-center text-base font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-2xl transition-all shadow-lg shadow-primary-600/20 btn-shimmer"
+                >
+                  Buy MedRecPlus — $20
+                </motion.div>
+              </Link>
 
               <p className="text-center text-xs text-slate-400 mt-4">
                 Secure payment • Instant access • 30-day money-back guarantee

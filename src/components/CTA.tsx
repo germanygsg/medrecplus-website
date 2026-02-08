@@ -1,5 +1,6 @@
 import { ArrowRight } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import AnimateOnScroll from './AnimateOnScroll';
 
 export default function CTA() {
@@ -29,14 +30,15 @@ export default function CTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-          <motion.a
-            whileHover={{ y: -4, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
-            whileTap={{ scale: 0.98 }}
-            href="#"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-primary-700 bg-white hover:bg-primary-50 rounded-2xl transition-all shadow-xl shadow-primary-900/20"
-          >
-            Buy MedRecPlus — $20 <ArrowRight size={20} weight="bold" />
-          </motion.a>
+          <Link to="/buy">
+            <motion.div
+              whileHover={{ y: -4, boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold text-primary-700 bg-white hover:bg-primary-50 rounded-2xl transition-all shadow-xl shadow-primary-900/20"
+            >
+              Buy MedRecPlus — $20 <ArrowRight size={20} weight="bold" />
+            </motion.div>
+          </Link>
           <motion.a
             whileHover={{ y: -2, borderColor: 'rgba(255, 255, 255, 0.6)' }}
             whileTap={{ scale: 0.98 }}

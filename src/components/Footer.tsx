@@ -1,9 +1,23 @@
 import { Heart } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  // Helper to render anchor or Link based on whether we're on home page
+  const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
+    if (href.startsWith('#')) {
+      if (isHomePage) {
+        return <a href={href} className="text-sm text-slate-400 hover:text-white transition-colors">{children}</a>;
+      }
+      return <Link to={`/${href}`} className="text-sm text-slate-400 hover:text-white transition-colors">{children}</Link>;
+    }
+    return <Link to={href} className="text-sm text-slate-400 hover:text-white transition-colors">{children}</Link>;
+  };
 
   return (
     <footer className="bg-slate-900 border-t border-slate-800">
@@ -11,7 +25,7 @@ export default function Footer() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center gap-2.5 mb-4">
+            <Link to="/" className="flex items-center gap-2.5 mb-4">
               <motion.img
                 whileHover={{ rotate: 10 }}
                 src={logo}
@@ -23,7 +37,7 @@ export default function Footer() {
               <span className="text-lg font-bold text-white tracking-tight">
                 MedRec<span className="text-primary-400">Plus</span>
               </span>
-            </div>
+            </Link>
             <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
               Secure, offline-first medical records management.
               One-time purchase. No subscription.
@@ -36,26 +50,10 @@ export default function Footer() {
               Product
             </h4>
             <ul className="space-y-2.5">
-              <li>
-                <a href="#features" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#security" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Security
-                </a>
-              </li>
-              <li>
-                <a href="#pricing" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a href="#faq" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  FAQ
-                </a>
-              </li>
+              <li><NavLink href="#features">Features</NavLink></li>
+              <li><NavLink href="#security">Security</NavLink></li>
+              <li><NavLink href="#pricing">Pricing</NavLink></li>
+              <li><NavLink href="#faq">FAQ</NavLink></li>
             </ul>
           </div>
 
@@ -65,21 +63,9 @@ export default function Footer() {
               Legal
             </h4>
             <ul className="space-y-2.5">
-              <li>
-                <a href="/privacy" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <a href="/terms" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Terms of Service
-                </a>
-              </li>
-              <li>
-                <a href="/refund" className="text-sm text-slate-400 hover:text-white transition-colors">
-                  Refund Policy
-                </a>
-              </li>
+              <li><NavLink href="/privacy">Privacy Policy</NavLink></li>
+              <li><NavLink href="/terms">Terms of Service</NavLink></li>
+              <li><NavLink href="/refund">Refund Policy</NavLink></li>
             </ul>
           </div>
 
@@ -97,6 +83,7 @@ export default function Footer() {
                   support@medrecplus.my.id
                 </a>
               </li>
+              <li><NavLink href="/contact">Contact Us</NavLink></li>
               <li>
                 <a href="/app/" className="text-sm text-slate-400 hover:text-white transition-colors">
                   Open App

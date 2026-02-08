@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/((?!api|_next|ss|assets|icon.webp).*)",
+            "destination": "/"
+        }
+    ]
+}

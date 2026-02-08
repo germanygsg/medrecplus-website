@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { List, X } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const NAV_LINKS = [
@@ -152,19 +153,19 @@ export default function Navbar() {
             >
               Open App
             </a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="#pricing"
-              onClick={(e) => smoothScroll(e, '#pricing')}
-              className="font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-all duration-500 ease-in-out shadow-sm shadow-primary-600/20"
-              style={{
-                padding: isCompact ? '0.375rem 0.875rem' : '0.625rem 1.25rem',
-                fontSize: isCompact ? '0.75rem' : '0.875rem'
-              }}
-            >
-              {isCompact ? 'Buy' : 'Buy — $20'}
-            </motion.a>
+            <Link to="/buy">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="font-semibold text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-all duration-500 ease-in-out shadow-sm shadow-primary-600/20"
+                style={{
+                  padding: isCompact ? '0.375rem 0.875rem' : '0.625rem 1.25rem',
+                  fontSize: isCompact ? '0.75rem' : '0.875rem'
+                }}
+              >
+                {isCompact ? 'Buy' : 'Buy — $20'}
+              </motion.div>
+            </Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -212,13 +213,12 @@ export default function Navbar() {
                 >
                   Open App
                 </a>
-                <a
-                  href="#pricing"
-                  onClick={(e) => smoothScroll(e, '#pricing')}
+                <Link
+                  to="/buy"
                   className="block px-3 py-2.5 text-base font-semibold text-center text-white bg-primary-600 hover:bg-primary-700 rounded-xl transition-colors"
                 >
                   Buy MedRecPlus — $20
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>
