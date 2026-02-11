@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { List, X } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const NAV_LINKS = [
@@ -16,6 +16,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
   const isCompact = scrolled && !open;
 
   useEffect(() => {
@@ -41,21 +43,43 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  // Scroll to hash on page load or navigation
+  useEffect(() => {
+    if (location.hash && location.pathname === '/') {
+      setTimeout(() => {
+        const el = document.querySelector(location.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [location]);
+
   const smoothScroll = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       e.preventDefault();
-      const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
       setOpen(false);
+
+      // If not on homepage, navigate there first with hash
+      if (location.pathname !== '/') {
+        navigate('/' + href);
+        return;
+      }
+
+      // Otherwise scroll smoothly to section after a brief delay
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 300);
     },
-    []
+    [location.pathname, navigate]
   );
 
   return (
     <nav
       className="fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out"
       style={{
-        top: isCompact ? '12px' : '0px',
+        top: isCompact ? '24px' : '0px',
         width: isCompact ? 'min(800px, calc(100% - 2rem))' : '100%',
         backgroundColor: isCompact || open ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
         backdropFilter: isCompact || open ? 'blur(12px)' : 'none',

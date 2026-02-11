@@ -29,7 +29,15 @@ const SOLUTIONS = [
 
 export default function ProblemSolution() {
   return (
-    <section className="py-16 sm:py-24 bg-white" id="why">
+    <section className="relative py-16 sm:py-24 bg-white overflow-hidden" id="why">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.4] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #cbd5e1 1.5px, transparent 1.5px)',
+          backgroundSize: '24px 24px'
+        }}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <AnimateOnScroll direction="up" className="text-center max-w-2xl mx-auto mb-14">

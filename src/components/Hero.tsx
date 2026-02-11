@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import chartingBg from '../assets/charting.webp';
 import {
   ShieldCheck,
   WifiSlash,
@@ -10,7 +11,17 @@ import {
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-primary-50/40 pt-24 sm:pt-32 pb-16 sm:pb-24">
+    <section className="relative overflow-hidden pt-24 sm:pt-32 pb-16 sm:pb-24">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={chartingBg}
+          alt=""
+          className="w-full h-full object-cover opacity-90 blur-[5px]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent" />
+      </div>
+
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <motion.div
